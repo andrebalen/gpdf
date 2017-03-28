@@ -6,6 +6,15 @@ O aplicativo recolhe esses dados e gera fichas em PDF para serem sincronizadas
 com a sede de importação
  - [ionic repo] (https://apps.ionic.io/app/ea5cf698)
 
+
+
+## Indice de Conteudos
+
+- [TODO] ( https://github.com/andrebalen/gpdf#todo)
+- [Estrutura de Arquivos] ( https://github.com/andrebalen/gpdf#estrutura-de-arquivos)
+- [Build] ( https://github.com/andrebalen/gpdf#build)
+- [Plugins incluidos] ( https://github.com/andrebalen/gpdf#plugins-incluidos)
+
 ## TODO
 - incluir controller para o salvamento e envio dos arquivos
 - 
@@ -15,13 +24,6 @@ com a sede de importação
 - decidir o que fazer com o video, ateh o momento nome e path no pdf apenas
 - o nom do video, tanto quanto do arquivo sai do apelido da fabrica unido com algo do produto
 
-
-## Table of Contents
-
-- [TODO] (#TODO)
-- [Estrutura de Arquivos] (#Estrutura de Arquivos)
-- [Build] (#Build)
-- [Plugins incluidos] (#Plugins incluidos)
 
 ## Estrutura de Arquivos
 
