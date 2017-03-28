@@ -26,127 +26,52 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
+
     <script type="text/javascript" src="js/jspdf.debug.js"> //jspdf.min.js</script>
     <!-- script type="text/javascript" src="js/plugins/cordova-plugin-file/www/file.js"></script --><!-- achar o lugar deste cara -->
-
-    <script type="text/javascript">
-
-    // Uma função que é chamada quando o DOM é carregado
-      function chama()
-      {
-    // Pegamos o elemento com id enviar e assim que clicar nele chama a função `pega`
-        document.getElementById('enviar').onclick = pega; // <button id="enviar">Enviar</button>
-      }
-
-      function onDeviceReady()
-      {
-        console.log(cordova.file);
-        console.log('ja preparou o campo pra salvar, vamos ver se segue ...');
-      }
-
-      // Função que pega o valor dos inputs e imprime o PDF mas o PATH nao ta rolando
-      function pega()
-      {
-
-      //  document.addEventListener("deviceready", onDeviceReady, false); // testa se ja esta ok pra salvar, ta dando pau, aparece um hello world quando gera o ipa
-        var nome  = document.getElementById('nome').value; //<input id="nome" type="text" />
-        //Logo Guelcos
-        var imgData = 'data:image/png;base64,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'
-        var name = 'ShingLing'; //prompt('Qual o apelido do fabricante');
-        var wechat = document.getElementById('wechat').value; //'shing1234ling'; //prompt('wechat do fabricante');
-        var tiprod = document.getElementById('tiprod').value; //'bicicletas,patinetes,artigos de fibra de vidro'; //prompt('Qual o tipo de produto deste fabricante');
-        var fob = document.getElementById('fob').value; //'SHANGHAI'; //prompt('Qual o porto que este fabricante utiliza');
-
-      //  document.addEventListener("deviceready", onDeviceReady, false);
-
-      //  function onDeviceReady() {
-      //    console.log("device ready");
-      //  }
-
-        var pdf = new jsPDF();
-        //var pdf = new jsPDF('p','in','letter');
-        pdf.setFont("helvetica");
-        pdf.setProperties({
-          title: 'Purchase Order Draft da Guelcos',
-          subject: 'produtos disponibilizados pelo fabricante: ' + name,
-          author: 'Andre Balen - balenpro@gmail.com',
-          keywords: 'draft, PO, guelcos, purchase order',
-          creator: 'gPDF, IOs generated, javascript, web 2.0, ajax'
-        });
-
-      //  pdf.setDrawColor(0);
-      //  pdf.setFillColor(255, 255, 255);
-      //  pdf.roundedRect(5, 8, 200, 18, 2, 2, 'FD'); //  Black sqaure with rounded corners
-
-        pdf.addImage(imgData, 10, 10); // adicionando logotipo no topo da pagina
-        pdf.text(70, 20, 'Draft PO do fabricante ' + nome);
-
-        //pdf.setFontSize(40);
-        pdf.text(20, 50, 'Apelido: ' + nome);
-        pdf.text(20, 60, 'incluir contato');
-        pdf.text(20, 70, '+ contato');
-        pdf.text(20, 80, 'wechat id /obs: ' + wechat);
-        pdf.text(20, 90, 'tipo de produto: ' + tiprod);
-        pdf.text(20, 100, 'FOB: ' + fob);
-        pdf.text(20, 110, 'Produtos');
-
-      //  document.getElementById("abc").innerHTML= nome +" "; // para escrever em qualquer lugar
-//        console.log("tenho onde salvar?: " + cordova.file);
-        // manha q encontrei para tentar salvar no IOs, tomara que  resolva
-        // fonte: https://forum.ionicframework.com/t/cannot-generate-a-pdf-file-from-localstorage/25279/5
-//          var pdfOutput = pdf.output("blob");
-//          var filePath = cordova.file.documentsDirectory; //+'/fbr_'+name+'.pdf'; //http://ngcordova.com/docs/plugins/file/
-//          var fileName = '/fbr_'+nome+'.pdf';
-//          console.log("local de salvamento:"+filePath);
-//          console.log("string de dados:"+pdfOutput);
-      //    $cordovaFile.writeFile(filePath, pdfOutput); //needs ngCordova and file plugin <-----------------------
-  //        console.log("salvando nota na pasta temp");
-//          cordova.file.writeExistingFile(filePath, fileName, pdfOutput);
-      //  isso aqui eh anotacao no pdf, nao precisamos pra este caso
-      //  var node = pdf.outline.add(null, 'onde fica o outline', null);
-      //  pdf.outline.add(node, 'fica aqui', {pageNumber:1});
-      //  pdf.save('fbr_'+name+'.pdf');
-//            pdf.save(cordova.file.documentsDirectory+'/fbr_'+name+'.pdf', function(err){console.log('saved! or not, you ll go, u get hi');});
-        //  prompt('vai salvar o pdf em' + cordova.file.documentsDirectory);
-    //    pdf.save('fbr_'+name+'_prd_'+tiprod+'.pdf');
-      //    alert(nome + ' <-- completo o ciclo');
-//      alert("pdf?", "gerar" , ok);
-      pdf.save('fbr_'+nome+'_prd_'+tiprod+'.pdf', function(err){console.log('saved!');}); // pra formatar o pdf eh util
-
-      }
-
-    </script>
+    <!--script src='js/require/require.js'></script --> <!-- tentando resolver um problema de build da versao 13 em diante -->
     <!-- your app's js -->
-    <script src="js/controller.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/controllers/pdf.js"></script>
   </head>
-  <body ng-app="starter" onload="chama()">
-    <div id="header" data-role="header">&nbsp;</div>
+  <body ng-app="starter"  data-ng-controller="pdfCtrl">
+
     <ion-pane>
       <ion-header-bar class="bar-stable">
         <h1 class="title">Inclusao de contato</h1>
       </ion-header-bar>
       <ion-content>
         <h3>gerando pdf com logo embutido no codigo</h3>
-        <p> so pra saber q eh diferente, gerando app 32</p>
-     <form>
+        <p>preenchendo automaticamente as variaveis para
+        testar o mecanismo de gerar e salvar o pdf</p>
+
+       <p> olhar o log de erro, vou trocar pela funcao com debug</p>
+       <p> tentando gravar na pasta das temp/ ver onde fica o
+      dropbox e tentar salvar direto, senao usar o app q acessa os
+      dois e mover na mao</p>
+      <p> so pra saber q eh diferente, gerando app 23</p>
+     <form name="data.form" id="form">
       <ion-list>
           <ion-item>
-            <input id="nome" placeholder="Apelido do Fabricante" type="text" ng-model="apelido" width="200" autofocus>
-            <p>Para este fabricante, {{ apelido }}, segue a inclusao de produtos:</p>
+            <input id="nome" placeholder="Apelido do Fabricante" type="text" ng-model="data.apelido" width="200" autofocus>
+            <p>Para este fabricante, {{ data.apelido }}, segue a inclusao de produtos:</p>
           </ion-item>
           <ion-item>
-            <input id="wechat" placeholder="wechat id / observacoes" type="text" onfocus="this.value=&apos;&apos;;">
+            <input id="wechat" placeholder="wechat id / observacoes" ng-model="data.wechat" type="text" onfocus="this.value=&apos;&apos;;">
           </ion-item>
           <ion-item>
-            <input id="tiprod" placeholder="Tipo de produto" type="text">
+            <input id="tiprod" placeholder="Tipo de produto"  ng-model="data.tiprod" type="text">
           </ion-item>
           <ion-item>
-            <input id="fob" placeholder="FOB" type="text">
+            <input id="fob" placeholder="FOB" ng-model="data.fob" type="text">
           </ion-item>
+        <ion-item>
+          <input id="produto" placeholder="produto" ng-model="produto.id" type="text">
+
+        </ion-item>
         </ion-list>
             <div align="center"> <!-- padding -->
-              <p><button block="" id="enviar">criar pdf</button></p>
+              <p><button block="" ng-click="file()" id="enviar">criar pdf</button></p>
                 <!-- button block id="enviar">criar pdf</button -->
             <!--button block="" id="limpar">Limpar</button -->
             <!-- button block="" id="remover" onclick="this.reset();">Limpar</button -->
@@ -163,7 +88,7 @@
               <!-- div id="abc"></div -->
 
               <!--p align="center"><ion-spinner name="ios"></ion-spinner>
-                trying to contact server --><!-- other names for spinner: ios ,ios-small, bubbles, circles, crescent, dots -->
+                trying to contact server <!-- other names for spinner: ios ,ios-small, bubbles, circles, crescent, dots -->
               <p></p>
       </ion-content>
     </ion-pane>
