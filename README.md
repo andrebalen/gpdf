@@ -6,7 +6,15 @@ O aplicativo recolhe esses dados e gera fichas em PDF para serem sincronizadas
 com a sede de importação
  - [ionic repo] (https://apps.ionic.io/app/ea5cf698)
 
+## Indice de Conteudos
+
+- [TODO] (https://github.com/andrebalen/gpdf#todo)
+- [Estrutura de Arquivos] (https://github.com/andrebalen/gpdf#estrutura-de-arquivos)
+- [Build] (https://github.com/andrebalen/gpdf#build)
+- [Plugins incluidos] (https://github.com/andrebalen/gpdf#plugins-incluidos)
+
 ## TODO
+
 - incluir controller para o salvamento e envio dos arquivos
 - 
 - incluir campo para escolher fazer ou nao o upload
@@ -16,40 +24,49 @@ com a sede de importação
 - o nom do video, tanto quanto do arquivo sai do apelido da fabrica unido com algo do produto
 
 
-## Table of Contents
-
-- [TODO] (#TODO)
-- [Estrutura de Arquivos] (#Estrutura de Arquivos)
-- [Build] (#Build)
-- [Plugins incluidos] (#Plugins incluidos)
-
 ## Estrutura de Arquivos
 
 Depois de criado, seu projeto vai se parecer com isto:
 
 ```
-gPDF/
-  README.md
-  node_modules/
-  package.json
-  public/
-    index.html
-    favicon.ico
-  src/
-    App.css
-    App.js
-    App.test.js
-    index.css
-    index.js
-    logo.svg
+www/
+|   index.html
+|   manifest.json
+|   service-worker.js
+|
++---css
+|       ionic.app.css
+|       ionic.app.min.css
+|       style.css
+|
++---dist
+|       jspdf.debug.js
+|       jspdf.min.js
+|
++---img
+|       ionic.png
+|
++---js
+|       app.js
+|       controller.js
+|       cordova.js
+|       cordova_plugins.js
+|       jspdf.debug.js
+|       jspdf.min.js
+|       ng-cordova.min.js
+|       outline.js
+|       test_harness.js
+|
+\---lib
 ```
 
 Para o Build deste projeto, **estes arquivos devem existir exatamente com estes nomes**:
 
-* `public/index.html` é o template da pagina;
-* `src/index.js` é o JavaScript de inicio.
+* `www/index.html` é o template da pagina;
+* `www/js/app.js` é o JavaScript de inicio.
 
 ## Build
+
 Comandos para baixar dependencias e tornar possivel o build
 
 ```
@@ -58,6 +75,7 @@ Comandos para baixar dependencias e tornar possivel o build
 ```
 
 ## Plugins incluidos
+
 Lista de plugins incluidos
 ```
 - ionic plugin add cordova-plugin-file
