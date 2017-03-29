@@ -63,7 +63,7 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
     pdf.setProperties({
       title: 'Purchase Order Draft da Guelcos',
       subject: 'produtos disponibilizados pelo fabricante: ' + name,
-      author: 'Andre Balen - balenpro@gmail.com',
+      author: 'VA',
       keywords: 'draft, PO, guelcos, purchase order',
       creator: 'gPDF, IOs generated, javascript, web 2.0, ajax'
     });
