@@ -2,7 +2,7 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
   $scope.data = {};
   $scope.produto = {};
   document.addEventListener("deviceready", function () {
-
+    alert("teste");
     var isOnline = $cordovaNetwork.isOnline();
     // Verifica se estamos online
     $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
