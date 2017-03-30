@@ -36,7 +36,7 @@
     <script src="js/controllers/pdf.js"></script>
 
   </head>
-  <body ng-app="starter"  data-ng-controller="pdfCtrl">
+  <body ng-app="starter"  data-ng-controller="pdfCtrl as pCtrl">
     <div id="header" data-role="header">&nbsp;</div>
     <ion-pane>
       <ion-header-bar class="bar-stable">
@@ -66,7 +66,7 @@
         </ion-item>
         </ion-list>
             <div align="center"> <!-- padding -->
-            <button ng-click="file()" id="enviar">criar pdf</button>
+            <a ng-click="pCtrl.file()" id="enviar">criar pdf</a>
                 <!-- button block id="enviar">criar pdf</button -->
             <!--button block="" id="limpar">Limpar</button -->
             <!-- button block="" id="remover" onclick="this.reset();">Limpar</button -->
