@@ -1,14 +1,17 @@
 GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaNetwork, $cordovaToast, $cordovaFileTransfer) {
   $scope.data = {};
   $scope.produto = {};
+  alert("VAMOS JOGAR UM JOGO!")
   document.addEventListener("deviceready", function () {
-    alert("teste");
+
+    console.log("OK LUCIANO");
+
     var isOnline = $cordovaNetwork.isOnline();
     // Verifica se estamos online
     $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
       $cordovaToast.show('Você está  Online', 'long', 'center')
       // Envia os arquivos para o FTP
-      var filePath = cordova.file.externalDataDirectory; //+'/fbr_'+name+'.pdf'; //http://ngcordova.com/docs/plugins/file/
+      var filePath = cordova.file.dataDirectory; //+'/fbr_'+name+'.pdf'; //http://ngcordova.com/docs/plugins/file/
       var localStorageItens = JSON.parse(window.localStorage.getItem('files'));
       angular.forEach(localStorageItens, function(value, key) {
         var options = new FileUploadOptions();
@@ -17,7 +20,7 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
         options.mimeType = "application/pdf";
         $cordovaFileTransfer.upload("http://trade.guelcos.com/files/file.php", filePath+value, options)
           .then(function(result) {
-           console.log(result);
+            delete localStorageItens[key];
           }, function(err) {
            console.log(err)
           }, function (progress) {
@@ -30,7 +33,8 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
     })
 
   $scope.file = function(){
-    var filePath = cordova.file.externalDataDirectory; //+'/fbr_'+name+'.pdf'; //http://ngcordova.com/docs/plugins/file/
+
+    var filePath = cordova.file.dataDirectory; //+'/fbr_'+name+'.pdf'; //http://ngcordova.com/docs/plugins/file/
     var fileName = 'fbr_'+$scope.data.apelido+'.pdf';
     //console.log("local de salvamento:"+filePath);
     $cordovaFile.writeFile(filePath, fileName, geraPdf());
@@ -42,6 +46,25 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
     localFiles.push(fileName);
     window.localStorage.setItem('files', JSON.stringify(localFiles))
     $scope.produto = {};
+    var filePath = cordova.file.dataDirectory; //+'/fbr_'+name+'.pdf'; //http://ngcordova.com/docs/plugins/file/
+    var localStorageItens = JSON.parse(window.localStorage.getItem('files'));
+    angular.forEach(localStorageItens, function(value, key) {
+      var options = new FileUploadOptions();
+      options.fileKey = "file";
+      options.fileName = value
+      options.mimeType = "application/pdf";
+      $cordovaFileTransfer.upload("http://trade.guelcos.com/files/file.php", filePath+value, options)
+        .then(function(result) {
+          delete localStorageItens[key];
+          $cordovaToast.show('Arquivos sincronizados com sucesso', 'long', 'center')
+        }, function(err) {
+          $cordovaToast.show('Ops, tivemos um problema', 'long', 'center')
+        }, function (progress) {
+          // constant progress updates
+        });
+
+
+    })
   }
 
 
@@ -63,7 +86,7 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
     pdf.setProperties({
       title: 'Purchase Order Draft da Guelcos',
       subject: 'produtos disponibilizados pelo fabricante: ' + name,
-      author: 'VA',
+      author: 'Andre Balen - balenpro@gmail.com',
       keywords: 'draft, PO, guelcos, purchase order',
       creator: 'gPDF, IOs generated, javascript, web 2.0, ajax'
     });
