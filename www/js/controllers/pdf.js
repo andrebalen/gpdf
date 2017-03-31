@@ -1,10 +1,8 @@
 GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaNetwork, $cordovaToast, $cordovaFileTransfer) {
   $scope.data = {};
   $scope.produto = {};
-  alert("VAMOS JOGAR UM JOGO!")
   document.addEventListener("deviceready", function () {
 
-    console.log("OK LUCIANO");
 
     var isOnline = $cordovaNetwork.isOnline();
     // Verifica se estamos online
@@ -55,9 +53,11 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
       options.mimeType = "application/pdf";
       $cordovaFileTransfer.upload("http://trade.guelcos.com/files/file.php", filePath+value, options)
         .then(function(result) {
+          console.log(result);
           delete localStorageItens[key];
           $cordovaToast.show('Arquivos sincronizados com sucesso', 'long', 'center')
         }, function(err) {
+          console.log(err)
           $cordovaToast.show('Ops, tivemos um problema', 'long', 'center')
         }, function (progress) {
           // constant progress updates
