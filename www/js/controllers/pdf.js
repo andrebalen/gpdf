@@ -1,6 +1,7 @@
-GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaNetwork, $cordovaToast, $cordovaFileTransfer) {
+GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaNetwork, $cordovaToast, $cordovaFileTransfer, ) {
   $scope.data = {};
   $scope.produto = {};
+  $scope.src = [];
   document.addEventListener("deviceready", function () {
 
 
@@ -72,7 +73,28 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
     })
   }
 
+    $scope.foto = function(index){
+      var options = {
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 100,
+        targetHeight: 100,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false,
+        correctOrientation:true
+      };
 
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+        $scope.src[index] = "data:image/jpeg;base64," + imageData;
+      }, function(err) {
+        // error
+      });
+
+
+    }
  // Função responsável por executar a captura dos dados e geração do PDF
   var geraPdf = function()
   {
@@ -98,6 +120,8 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
     });
 
     pdf.addImage(imgData, 10, 10); // adicionando logotipo no topo da pagina
+    pdf.addImage($scope.src[1], 10, 10); // adicionando logotipo no topo da pagina
+    pdf.addImage($scope.src[2], 10, 10); // adicionando logotipo no topo da pagina
     pdf.text(70, 20, 'Draft PO do fabricante ' + name);
 
     //pdf.setFontSize(40);
