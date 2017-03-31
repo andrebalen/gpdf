@@ -33,7 +33,7 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
   $scope.file = function(){
 
     var filePath = cordova.file.dataDirectory; //+'/fbr_'+name+'.pdf'; //http://ngcordova.com/docs/plugins/file/
-    var fileName = 'fbr_'+Math.random().toString(36).substring(7)+$scope.data.apelido+'.pdf';
+    var fileName = 'fbr_'+Math.random().toString(36).substring(7)+"_"+$scope.data.apelido+'.pdf';
    console.log("local de salvamento:"+fileName);
 
 
