@@ -1,4 +1,4 @@
-GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaNetwork, $cordovaToast, $cordovaFileTransfer, ) {
+GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaNetwork, $cordovaToast, $cordovaFileTransfer,$cordovaCamera) {
   $scope.data = {};
   $scope.produto = {};
   $scope.src = [];
