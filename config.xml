@@ -77,7 +77,7 @@
         <splash height="1280" src="resources/wp8/splash/SplashScreenImage.png" width="768" />
     </platform>
 
-    <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
+    <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <plugin name="cordova-plugin-statusbar" version="2.2.2" />
     <plugin name="cordova-plugin-splashscreen" version="3.2.2" />
     <plugin name="cordova-plugin-inappbrowser" version="1.7.0" />
@@ -102,6 +102,4 @@
 
     <plugin name="cordova-plugin-whitelist" spec="~1.2.2" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
-    <plugin name="File" value="CDVFile" />
-    <plugin name="FileTransfer" value="CDVFileTransfer" />
 </widget>
