@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>guelcos po to pdf to dropbox app</title>
+    <title>guelcos Trade Fair App</title>
 
     <link rel="manifest" href="manifest.json">
     <!-- script>
@@ -26,76 +26,70 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-
     <script type="text/javascript" src="js/jspdf.debug.js"> //jspdf.min.js</script>
     <!-- script type="text/javascript" src="js/plugins/cordova-plugin-file/www/file.js"></script --><!-- achar o lugar deste cara -->
-    <!--script src='js/require/require.js'></script --> <!-- tentando resolver um problema de build da versao 13 em diante -->
+
     <!-- your app's js -->
     <script src="js/app.js"></script>
-    <script src="js/controllers/pdf.js"></script>
-    <script src="http://10.1.1.152:8080/target/target-script-min.js#gpdf"></script>
-  </head>
-  <body ng-app="starter"  data-ng-controller="pdfCtrl">
+    <script src="js/controller/pdf.js"></script>
 
+  </head>
+  <body ng-app="starter" data-ng-controller="pdfCtrl">
+    <div id="header" data-role="header">&nbsp;</div>
     <ion-pane>
       <ion-header-bar class="bar-stable">
         <h1 class="title">Inclusao de contato</h1>
       </ion-header-bar>
       <ion-content>
-        <h3>gerando pdf com logo embutido no codigo</h3>
-        <p>preenchendo automaticamente as variaveis para
-        testar o mecanismo de gerar e salvar o pdf</p>
+        <h3>Ficha do fabricante</h3>
+        <p align="right"> guelcos app v0.56</p>
+        <form name="data.form" id="form">
+         <ion-list>
+           <ion-item>
+             <button class="button button-energized" id="foto1" placeholder="incluir cartao 1" ng-click="foto(1)" ng-model="data.foto1">cartao 1</button>
+             <img ng-src="data:image/png;base64,{{$src[1]}}" width="100px" alt="preview">
+           </ion-item>
+           <ion-item>
+             <button class="button button-energized" id="foto2" placeholder="incluir cartao 2" ng-click="foto(2)" ng-model="data.foto2">cartao 2</button>
+              <img ng-src="data:image/png;base64,{{$src[2]}}" width="100px" alt="preview">
+           </ion-item>
+             <ion-item>
+               <input id="nome" placeholder="Apelido do Fabricante" type="text" ng-model="data.apelido" width="200" autofocus>
+               <p>Para este fabricante, {{ data.apelido }}, segue a inclusao de produtos:</p>
+             </ion-item>
+             <ion-item>
+               <input id="wechat" placeholder="wechat id / observacoes" ng-model="data.wechat" type="text" onfocus="this.value=&apos;&apos;;">
+             </ion-item>
+             <ion-item>
+               <input id="tiprod" placeholder="Tipo de produto" ng-model="data.tiprod" type="text">
+             </ion-item>
+             <ion-item>
+               <input id="fob" placeholder="FOB" ng-model="data.fob" type="text">
+             </ion-item>
+           <ion-item>
+             <input id="produto" placeholder="produto" ng-model="produto.id" type="text">
 
-       <p> olhar o log de erro, vou trocar pela funcao com debug</p>
-       <p> tentando gravar na pasta das temp/ ver onde fica o
-      dropbox e tentar salvar direto, senao usar o app q acessa os
-      dois e mover na mao</p>
-      <p> so pra saber q eh diferente, gerando app 23</p>
-     <form name="data.form" id="form">
-      <ion-list>
-          <ion-item>
-            <input id="nome" placeholder="Apelido do Fabricante" type="text" ng-model="data.apelido" width="200" autofocus>
-            <p>Para este fabricante, {{ data.apelido }}, segue a inclusao de produtos:</p>
-          </ion-item>
-          <ion-item>
-            <input id="wechat" placeholder="wechat id / observacoes" ng-model="data.wechat" type="text" onfocus="this.value=&apos;&apos;;">
-          </ion-item>
-          <ion-item>
-            <input id="tiprod" placeholder="Tipo de produto"  ng-model="data.tiprod" type="text">
-          </ion-item>
-          <ion-item>
-            <input id="fob" placeholder="FOB" ng-model="data.fob" type="text">
-          </ion-item>
-        <ion-item>
-          <input id="produto" placeholder="produto" ng-model="produto.id" type="text">
+           </ion-item>
+           </ion-list>
+               <div align="center"> <!-- padding -->
+                 <p><button class="button button-full button-energized" block="" ng-click="file()" id="enviar" ng-model="btn"><i class="icon ion-compose"></i> i n c l u i r </button></p>
+                   <!-- button block id="enviar">criar pdf</button -->
+               <!--button block="" id="limpar">Limpar</button -->
+               <!-- button block="" id="remover" onclick="this.reset();">Limpar</button -->
+             </div>
 
-        </ion-item>
-        <ion-item>
-          <button id="foto1" placeholder="foto1" ng-click="foto(1)" ng-model="data.foto1" >Foto 1</button>
-        </ion-item>
-        <ion-item>
-          <button id="foto2" placeholder="foto2" ng-click="foto(2)" ng-model="data.foto2">Foto 2</button>
-        </ion-item>
-        </ion-list>
-            <div align="center"> <!-- padding -->
-              <button class="button button-full button-energized" ng-click="file()"  id="enviar" ng-model="btn" >criar pdf</button>
-                <!-- button block id="enviar">criar pdf</button -->
-            <!--button block="" id="limpar">Limpar</button -->
-            <!-- button block="" id="remover" onclick="this.reset();">Limpar</button -->
-          </div>
-
-        </form>
-          <div>
-            <!-- script type="text/javascript">
-             var free = getFreeDiskSpace();
-             document.write('<p>espa�o livre: {{ free }} mb</p>');
-            </script -->
-          </div>
+           </form>
+          <!-- div>
+            <script type="text/javascript">
+             var $scope.free = getFreeDiskSpace();
+             document.write('<p>espaço livre: {{ free }} mb</p>');
+            </script>
+          </div -->
           <ion-icon name="ion-social-dropbox-outline"></ion-icon>
               <!-- div id="abc"></div -->
 
               <!--p align="center"><ion-spinner name="ios"></ion-spinner>
-                trying to contact server <!-- other names for spinner: ios ,ios-small, bubbles, circles, crescent, dots -->
+                trying to contact server --><!-- other names for spinner: ios ,ios-small, bubbles, circles, crescent, dots -->
               <p></p>
       </ion-content>
     </ion-pane>
