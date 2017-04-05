@@ -35,27 +35,26 @@
 
   </head>
   <body ng-app="starter" data-ng-controller="pdfCtrl">
-    <div id="header" data-role="header">&nbsp;</div>
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Inclusao de contato</h1>
+        <p align="left"><img src="img/simbolo.png"></p><h1 class="title">Guelcos Trade Fair App</h1>
       </ion-header-bar>
       <ion-content>
-        <h3>Ficha do fabricante</h3>
-        <p align="right"> guelcos app v0.56</p>
         <form name="data.form" id="form">
+          <table style="width:100%">
+            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><p align="right">cliente:  </p>&nbsp;&nbsp;</td><td><p align="center"><input id="tiprod" placeholder="digite seu usuario" ng-model="data.user" type="text"></p></td></tr>
+          </table>
+        <h3>Ficha do fabricante</h3>
          <ion-list>
            <ion-item>
-             <button class="button button-energized" id="foto1" placeholder="incluir cartao 1" ng-click="foto(1)" ng-model="data.foto1">cartao 1</button>
-             <img ng-src="data:image/png;base64,{{$src[1]}}" width="100px" alt="preview">
-           </ion-item>
-           <ion-item>
-             <button class="button button-energized" id="foto2" placeholder="incluir cartao 2" ng-click="foto(2)" ng-model="data.foto2">cartao 2</button>
-              <img ng-src="data:image/png;base64,{{$src[2]}}" width="100px" alt="preview">
+             <button class="button button-energized" id="foto1" ng-click="foto(1)" ng-model="data.foto1"> + cartao</button>
+             <img ng-src="{{src[1]}}" width="350px" alt="preview">
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <button class="button button-energized" id="foto2" ng-click="foto(2)" ng-model="data.foto2">  2o cartao </button>
+              <img ng-src="{{src[2]}}" width="350px" alt="preview">
            </ion-item>
              <ion-item>
                <input id="nome" placeholder="Apelido do Fabricante" type="text" ng-model="data.apelido" width="200" autofocus>
-               <p>Para este fabricante, {{ data.apelido }}, segue a inclusao de produtos:</p>
              </ion-item>
              <ion-item>
                <input id="wechat" placeholder="wechat id / observacoes" ng-model="data.wechat" type="text" onfocus="this.value=&apos;&apos;;">
@@ -64,13 +63,49 @@
                <input id="tiprod" placeholder="Tipo de produto" ng-model="data.tiprod" type="text">
              </ion-item>
              <ion-item>
-               <input id="fob" placeholder="FOB" ng-model="data.fob" type="text">
+               <input id="fob" placeholder="icoterms: termos internacionais de comercio utilizado, normalmente FOB" ng-model="data.fob" type="text">
              </ion-item>
-           <ion-item>
-             <input id="produto" placeholder="produto" ng-model="produto.id" type="text">
-
-           </ion-item>
+             <ion-item>
+               <input id="origem" placeholder="porto de origem" ng-model="data.origem" type="text">
+             </ion-item>
+             <ion-item>
+               <input id="destino" placeholder="porto de destino" ng-model="data.destino" type="text">
+             </ion-item>
+              <h3>Ficha de produto, fabricante: {{ data.apelido }}</h3>
+             <ion-item>
+              <input id="produto" placeholder="modelo / descricao" ng-model="produto.id" type="text">
+             </ion-item>
+             <ion-item>
+               <input id="hscode" placeholder="codigo unico do produto: hscode" ng-model="produto.hscode" type="text">
+             </ion-item>
+             <ion-item>
+               <input id="moq" placeholder="moq - quantidade mínima vendida deste produto" ng-model="produto.moq" type="text">
+             </ion-item>
+             <ion-item>
+               <input id="detalhes" placeholder="hscode" ng-model="produto.detalhes" type="text">
+             </ion-item>
+             <ion-item>
+               <input id="inmetro" placeholder="necessita inmetro? sim/nao" ng-model="produto.inmetro" type="text">
+             </ion-item>
+             <ion-item>
+               <input id="obs" placeholder="obs, recomendacoes, o contato da fabrica fala bem ingles?" ng-model="produto.obs" type="text">
+             </ion-item>
+             <ion-item>
+               <button class="button button-energized" id="prod1" ng-click="foto(3)" ng-model="data.foto3">imagem do produto 1 </button>
+               <img ng-src="{{src[3]}}" width="250px" alt="preview">
+               &nbsp;&nbsp;
+               <button class="button button-energized" id="prod2" ng-click="foto(4)" ng-model="data.foto4">imagem do produto 2 </button>
+                <img ng-src="{{src[4]}}" width="250px" alt="preview">
+             </ion-item>
+             <ion-item>
+               <button class="button button-energized" id="prod3" ng-click="foto(5)" ng-model="data.foto5">imagem do produto 3 </button>
+               <img ng-src="{{src[5]}}" width="250px" alt="preview">
+               &nbsp;&nbsp;
+               <button class="button button-energized" id="prod4" ng-click="foto(6)" ng-model="data.foto6">imagem do produto 4 </button>
+                <img ng-src="{{src[6]}}" width="250px" alt="preview">
+             </ion-item>
            </ion-list>
+           <p></p>
                <div align="center"> <!-- padding -->
                  <p><button class="button button-full button-energized" block="" ng-click="file()" id="enviar" ng-model="btn"><i class="icon ion-compose"></i> i n c l u i r </button></p>
                    <!-- button block id="enviar">criar pdf</button -->
@@ -85,7 +120,19 @@
              document.write('<p>espaço livre: {{ free }} mb</p>');
             </script>
           </div -->
-          <ion-icon name="ion-social-dropbox-outline"></ion-icon>
+          <pre>
+
+
+
+
+
+
+
+
+
+          </pre>
+          <p align="right">guelcos app v0.69</p>
+          <!-- ion-icon name="ion-social-dropbox-outline"></ion-icon -->
               <!-- div id="abc"></div -->
 
               <!--p align="center"><ion-spinner name="ios"></ion-spinner>
