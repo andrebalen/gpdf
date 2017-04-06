@@ -41,16 +41,14 @@
       </ion-header-bar>
       <ion-content>
         <form name="data.form" id="form">
-          <table style="width:100%">
-            <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><p align="right">cliente:  </p>&nbsp;&nbsp;</td><td><p align="center"><input id="tiprod" placeholder="digite seu usuario" ng-model="data.user" type="text"></p></td></tr>
-          </table>
+            <p align="left" class="user"><input id="user" placeholder="digite seu usuario" ng-model="data.user" type="text"></p>
         <h3>Ficha do fabricante</h3>
          <ion-list>
            <ion-item>
-             <button class="button button-energized" id="foto1" ng-click="foto(1)" ng-model="data.foto1"> + cartao</button>
+             <button class="button button-energized" id="foto1" ng-click="foto(1)" ng-model="data.foto1"><i class="icon icon ion-ios-eye"></i> + cartao</button>
              <img ng-src="{{src[1]}}" width="350px" alt="preview">
              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             <button class="button button-energized" id="foto2" ng-click="foto(2)" ng-model="data.foto2">  2o cartao </button>
+             <button class="button button-energized" id="foto2" ng-click="foto(2)" ng-model="data.foto2"><i class="icon icon ion-ios-eye"></i> 2o cartao </button>
               <img ng-src="{{src[2]}}" width="350px" alt="preview">
            </ion-item>
              <ion-item>
@@ -91,17 +89,20 @@
                <input id="obs" placeholder="obs, recomendacoes, o contato da fabrica fala bem ingles?" ng-model="produto.obs" type="text">
              </ion-item>
              <ion-item>
-               <button class="button button-energized" id="prod1" ng-click="foto(3)" ng-model="data.foto3">imagem do produto 1 </button>
+               <p> inclua algumas imagens deste produto </p>
+             </ion-item>
+             <ion-item>
+               <button class="button button-energized" id="prod1" ng-click="foto(3)" ng-model="data.foto3"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                <img ng-src="{{src[3]}}" width="250px" alt="preview">
                &nbsp;&nbsp;
-               <button class="button button-energized" id="prod2" ng-click="foto(4)" ng-model="data.foto4">imagem do produto 2 </button>
+               <button class="button button-energized" id="prod2" ng-click="foto(4)" ng-model="data.foto4"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 2 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                 <img ng-src="{{src[4]}}" width="250px" alt="preview">
              </ion-item>
              <ion-item>
-               <button class="button button-energized" id="prod3" ng-click="foto(5)" ng-model="data.foto5">imagem do produto 3 </button>
+               <button class="button button-energized" id="prod3" ng-click="foto(5)" ng-model="data.foto5"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 3 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                <img ng-src="{{src[5]}}" width="250px" alt="preview">
                &nbsp;&nbsp;
-               <button class="button button-energized" id="prod4" ng-click="foto(6)" ng-model="data.foto6">imagem do produto 4 </button>
+               <button class="button button-energized" id="prod4" ng-click="foto(6)" ng-model="data.foto6"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 4 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                 <img ng-src="{{src[6]}}" width="250px" alt="preview">
              </ion-item>
            </ion-list>
@@ -112,14 +113,7 @@
                <!--button block="" id="limpar">Limpar</button -->
                <!-- button block="" id="remover" onclick="this.reset();">Limpar</button -->
              </div>
-
            </form>
-          <!-- div>
-            <script type="text/javascript">
-             var $scope.free = getFreeDiskSpace();
-             document.write('<p>espaço livre: {{ free }} mb</p>');
-            </script>
-          </div -->
           <pre>
 
 
@@ -127,11 +121,9 @@
 
 
 
-
-
-
           </pre>
-          <p align="right">guelcos app v0.69</p>
+          <p>livre no dispositivo: {{ free }} mb</p>
+          <p align="right"> v0.76 (c) guelcos.com, este projeto é mantido colaborativamente em: http://github.com/andrebalen/gpdf</p>
           <!-- ion-icon name="ion-social-dropbox-outline"></ion-icon -->
               <!-- div id="abc"></div -->
 

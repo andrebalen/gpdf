@@ -48,14 +48,7 @@ www/
 |
 +---js
 |       app.js
-|       controller.js
-|       cordova.js
-|       cordova_plugins.js
-|       jspdf.debug.js
-|       jspdf.min.js
-|       ng-cordova.min.js
-|       outline.js
-|       test_harness.js
++-------/controller/pdf.js
 |
 \---lib
 ```
@@ -64,6 +57,7 @@ Para o Build deste projeto, **estes arquivos devem existir exatamente com estes 
 
 * `www/index.html` é o template da pagina;
 * `www/js/app.js` é o JavaScript de inicio.
+* `www/js/controller/pdf.js é o controller de todas as acoes
 
 ## Build
 
@@ -82,6 +76,13 @@ Lista de plugins incluidos
 - ionic plugin add cordova-plugin-file-tranfer
 - ionic plugin add cordova-plugin-toast
 - ionic plugin add cordova-plugin-network-information
-
-
 ```
+
+## Trobleshooting
+
+O que acontece quando algo nao funciona normalmente é um plugin quebrado, pra saber o que nao esta presente, siga este procedimento:
+```
+- ionic platform remove ios
+- ionic platform add ios
+```
+ai é só adicionar os plugins ou ajustar no xml, as vezes pode ser exaustivo, mas uma vez correto, nao da mais problema
