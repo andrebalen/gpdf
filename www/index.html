@@ -6,13 +6,7 @@
     <title>guelcos Trade Fair App</title>
 
     <link rel="manifest" href="manifest.json">
-    <!-- script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(() => console.log('service worker installed'))
-          .catch(err => console.log('Error', err));
-      }
-    </script -->
+
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
@@ -74,23 +68,30 @@
               <input id="produto" placeholder="modelo / descricao" ng-model="produto.id" type="text">
              </ion-item>
              <ion-item>
-               <input id="hscode" placeholder="codigo unico do produto: hscode" ng-model="produto.hscode" type="text">
-             </ion-item>
-             <ion-item>
                <input id="moq" placeholder="moq - quantidade mínima vendida deste produto" ng-model="produto.moq" type="text">
              </ion-item>
              <ion-item>
-               <input id="detalhes" placeholder="hscode" ng-model="produto.detalhes" type="text">
+               <input id="preco" placeholder="preco deste produto" ng-model="produto.preco" type="text">
+             </ion-item>
+             <ion-item>
+               <input id="detalhes" placeholder="inclua os detalhes, cor, embalagem, voltagem, tamanho do aro, etc..." ng-model="produto.detalhes" type="text">
+             </ion-item>
+             <ion-item>
+              <input size="50" maxlength="50" id="obs" placeholder="obs (60 chars)" ng-model="produto.obs" type="text">
+              <input size="60" maxlength="60" id="obs2" background-color="gray" placeholder="recomendacoes (60 chars)" ng-model="produto.obs2" type="text">
+              <input size="60" maxlength="60" id="obs3" placeholder="o contato da fabrica fala bem ingles? (60 chars)" ng-model="produto.obs3" type="text">
+             </ion-item>
+             <ion-item>
+               <input id="hscode" placeholder="codigo unico do produto: hscode" ng-model="produto.hscode" type="text">
              </ion-item>
              <ion-item>
                <input id="inmetro" placeholder="necessita inmetro? sim/nao" ng-model="produto.inmetro" type="text">
              </ion-item>
+
              <ion-item>
-               <input id="obs" placeholder="obs, recomendacoes, o contato da fabrica fala bem ingles?" ng-model="produto.obs" type="text">
+               <p> Inclua algumas imagens deste produto </p>
              </ion-item>
-             <ion-item>
-               <p> inclua algumas imagens deste produto </p>
-             </ion-item>
+
              <ion-item>
                <button class="button button-energized" id="prod1" ng-click="foto(3)" ng-model="data.foto3"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                <img ng-src="{{src[3]}}" width="250px" alt="preview">
@@ -98,6 +99,7 @@
                <button class="button button-energized" id="prod2" ng-click="foto(4)" ng-model="data.foto4"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 2 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                 <img ng-src="{{src[4]}}" width="250px" alt="preview">
              </ion-item>
+
              <ion-item>
                <button class="button button-energized" id="prod3" ng-click="foto(5)" ng-model="data.foto5"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 3 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                <img ng-src="{{src[5]}}" width="250px" alt="preview">
@@ -105,6 +107,7 @@
                <button class="button button-energized" id="prod4" ng-click="foto(6)" ng-model="data.foto6"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 4 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                 <img ng-src="{{src[6]}}" width="250px" alt="preview">
              </ion-item>
+
            </ion-list>
            <p></p>
                <div align="center"> <!-- padding -->
@@ -119,13 +122,16 @@
 
 
 
-
-
           </pre>
-          <p>livre no dispositivo: {{ free }} mb</p>
-          <p align="right"> v0.76 (c) guelcos.com, este projeto é mantido colaborativamente em: http://github.com/andrebalen/gpdf</p>
+          <p> Visualizar itens da fila de envio:</p>
+          <div ng-repeat="w in localstorage.item">
+           [{{$index + 1}}]<button class="button button-full" ng-click="showPdf(w)">  {{w}}  </button>
+          </div>
+
+          <!--p>livre no dispositivo: {{ free }} mb</p -->
+          <p align="right"> v0.107 (c) guelcos.com </p>
           <!-- ion-icon name="ion-social-dropbox-outline"></ion-icon -->
-              <!-- div id="abc"></div -->
+              <!-- div id="abc">, este projeto é mantido colaborativamente em: http://github.com/andrebalen/gpdf</div -->
 
               <!--p align="center"><ion-spinner name="ios"></ion-spinner>
                 trying to contact server --><!-- other names for spinner: ios ,ios-small, bubbles, circles, crescent, dots -->

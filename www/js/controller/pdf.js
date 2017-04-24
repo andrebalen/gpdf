@@ -1,9 +1,10 @@
-GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaNetwork, $cordovaToast, $cordovaFileTransfer, $cordovaCamera)
+GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaNetwork, $cordovaToast, $cordovaFileTransfer, $cordovaCamera, $cordovaFileOpener2)
 {
   $scope.data = {};
   $scope.produto = {};
   $scope.free = {};
   $scope.src = [];
+  $scope.localstorage = [];
 
   document.addEventListener("deviceready", function ()
   {
@@ -14,6 +15,7 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
       // Envia os arquivos para a sede via trade.guelcos.com
       var filePath = cordova.file.dataDirectory; //+'/fbr_'+name+'.pdf'; //http://ngcordova.com/docs/plugins/file/
       var localStorageItens = JSON.parse(window.localStorage.getItem('files'));
+      $scope.localstorage = localStorageItens;
       angular.forEach(localStorageItens, function(value, key)
       {
         var options = new FileUploadOptions();
@@ -36,18 +38,22 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
         })
       })
 
-    console.log("vou ver o espaco livre");
-    $scope.free = getFreeDiskSpace(); // pra mostrar o que ainda tem de espaco
-    console.log("espaco livre é :"+ $scope.free);
+  //  console.log("vou ver o espaco livre");
+  //  $scope.free = $cordovaFile.getFreeDiskSpace(); // pra mostrar o que ainda tem de espaco
+//    console.log("espaco livre é :"+ free);
 
-    $scope.file = function(){
+    $scope.file = function()
+
+    {
       //alternativas para criar arquivos unicos, prefiro o timestamp
-      var atual_data = new Date();
-      var mili = atual_data.getTime();
+      //var atual_data = new Date().toISOString().split("T",1);
+      var epoc = new Date().getTime();
+      //var tstamp = Number(atual_data);
+      //console.log("timestamp human readable: "+atual_data+"_"+epoc);
       //var randon_chars = Math.random().toString(36).substring(7);
 
       var filePath = cordova.file.dataDirectory; //http://ngcordova.com/docs/plugins/file/
-      var fileName = $scope.data.user+'_fbr_'+$scope.data.apelido+'_prod_'+$scope.produto.id+'_'+mili+'.pdf';
+      var fileName = epoc+'_'+$scope.data.user+'_fbr_'+$scope.data.apelido+'_prod_'+$scope.produto.id+'.pdf';
       console.log("local de salvamento:"+filePath);
       console.log("nome do arquivo:"+fileName);
   //    $cordovaFile.writeFile(filePath, fileName, geraPdf());
@@ -65,25 +71,25 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
       $scope.produto = {}; // zera o escopo produto depois q escreve o PDF
       //zera a imagem arquivo, é uma imagem em branco
       //    var limpa = 'data:image/png;base64,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';
-      console.log($scope.src);
-      console.log("vou zerar as posicoes de imagens do produto, e talvez do 2o cartao");
+    //  console.log($scope.src);
+  //    console.log("vou zerar as posicoes de imagens do produto, e talvez do 2o cartao");
       // forma polida de fazer
       $scope.src.splice(3, 4); // limpa a partir da 3a posicao 4 posicoes incluindo a 3a
-      //forma ogra de fazer
+      //preciso arrumar uma forma de remover o buffer de imagem da view
       $scope.src[3]=''; //limpa;
       $scope.src[4]=''; //limpa;
       $scope.src[5]=''; //limpa;
       $scope.src[6]=''; //limpa;
-      console.log("sera q rolou?");
-      console.log($scope.src);
+      //console.log("sera q rolou?");
+    //  console.log($scope.src);
       var filePath = cordova.file.dataDirectory; //http://ngcordova.com/docs/plugins/file/
       var localStorageItens = JSON.parse(window.localStorage.getItem('files'));
         console.log(localStorageItens, "lero")
         if(isOnline)
         {
           console.log("está online")
-          console.log($scope.data)
-          console.log($scope.produto)
+    //      console.log($scope.data)
+//          console.log($scope.produto)
           angular.forEach(localStorageItens, function(value, key)
           {
             var options = new FileUploadOptions();
@@ -93,12 +99,12 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
             $cordovaFileTransfer.upload("http://trade.guelcos.com/files/file.php", filePath+value, options)
               .then(function(result)
               {
-                console.log(result, "ok");
+      //          console.log(result, "ok");
                 delete localStorageItens[key];
                 $cordovaToast.show('Fichas sincronizadas com sucesso', 'long', 'top')
               }, function(err)
               {
-                console.log(err)
+    //            console.log(err)
                 $cordovaToast.show('Link indisponivel, incluindo na fila', 'long', 'top')
               }, function (progress)
               {
@@ -112,20 +118,20 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
 //captura de imagem
       $scope.foto = function(index){
         var options = {
-          quality: 20,
+          quality: 100,
           destinationType: Camera.DestinationType.DATA_URL,
           sourceType: Camera.PictureSourceType.CAMERA,
           allowEdit: true,
-          encodingType: Camera.EncodingType.PNG,
-          targetWidth: 350,
-          targetHeight: 200,
+          encodingType: Camera.EncodingType.JPG,
+          targetWidth: 900,
+          targetHeight: 675,
           popoverOptions: CameraPopoverOptions,
           saveToPhotoAlbum: false,
           correctOrientation:true
         }; //340 189 180 x 100 eh uma boa
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
-          $scope.src[index] = "data:image/PNG;base64," + imageData;
+          $scope.src[index] = "data:image/JPG;base64," + imageData;
           console.log($scope.src)
         }, function(err) {
           // error
@@ -151,13 +157,17 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
     var id = $scope.produto.id || '';
     var hscode = $scope.produto.hscode || '';
     var moq = $scope.produto.moq || '';
+    var preco = $scope.produto.preco || '';
     var detalhes = $scope.produto.detalhes || '';
     var inmetro = $scope.produto.inmetro || '';
     var obs = $scope.produto.obs || '';
-
+    var obs2 = $scope.produto.obs2 || '';
+    var obs3 = $scope.produto.obs3 || '';
 
 
     var pdf = new jsPDF();
+//    var temCartoes = false;
+//    var tem3aimagemDeProduto = false;
 
     pdf.setFont("helvetica");
     pdf.setProperties({
@@ -173,51 +183,110 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
     pdf.setTextColor(150);
     pdf.text(145, 5, '' + now);
     pdf.setTextColor(50);
-    pdf.setFontSize(12);
+    pdf.setFontSize(10);
     pdf.addImage(imgData, 5, 5); // adicionando logotipo no topo da pagina
-    pdf.text(20, 30, ' Fornecedor: ' + name);
-    pdf.text(20, 40, ' Cliente: '+ usuario);
-    if($scope.src[1]) // se nao tiver imagem nem perde tempo
-    {
-      pdf.addImage($scope.src[1], 120, 50); // cartao 1
-    }
-    if($scope.src[2]) // se nao tiver imagem nem perde tempo
-    {
-      pdf.addImage($scope.src[2], 120, 120); // cartao 2
-    }
-    pdf.text(20, 50, 'Apelido da Fabrica: ' + name);
-    pdf.text(20, 60, 'wechat id / obs: ' + wechat);
-    pdf.text(20, 70, 'tipo de produto: ' + tiprod);
-    pdf.text(20, 80, 'incoterms: ' + fob);
-    pdf.text(20, 90, 'origem: ' + origem);
-    pdf.text(20, 100, 'destino: ' + destino);
+
+    pdf.text(20, 30, 'Fornecedor: ' + name);
+    pdf.text(20, 35, 'Cliente: '+ usuario);
+
+    pdf.text(20, 40, 'Apelido da Fabrica: ' + name);
+    pdf.text(20, 45, 'wechat id / obs: ' + wechat);
+    pdf.text(20, 50, 'tipo de produto: ' + tiprod);
+    pdf.text(20, 55, 'incoterms: ' + fob);
+    pdf.text(20, 60, 'origem: ' + origem);
+    pdf.text(20, 65, 'destino: ' + destino);
     pdf.setTextColor(150);
     pdf.setLineWidth(0.2);
-    pdf.line(20, 110, 90, 110); // nao to sacando a moral dessa linha
+    pdf.line(20, 70, 90, 70); // comeca no 20 na altura 110 termina no 90 na altura 110
     pdf.setTextColor(50);
-    pdf.text(20, 120, 'Modelo/Descrição:' +id);
-    pdf.text(20, 130, 'HS CODE:' +hscode);
-    pdf.text(20, 140, 'MOQ:' +moq);
-    pdf.text(20, 150, 'Detalhes: ' +detalhes);
-    pdf.text(20, 160, 'Inmetro?:' +inmetro);
-    pdf.text(20, 170, 'Observações: ' +obs);
+    pdf.text(20, 75, 'Modelo/Descrição:' +id);
+    pdf.text(20, 80, 'HS CODE:' +hscode);
+    pdf.text(20, 85, 'MOQ:' +moq);
+    pdf.text(60, 85, 'Preço: U$'+preco);
+    pdf.text(20, 90, 'Descrição: ' +detalhes);
+    pdf.text(20, 95, 'Inmetro?:' +inmetro);
+    pdf.text(20, 100, 'Observações: ' +obs);
+    pdf.text(20, 105, '' +obs2);
+    pdf.text(20, 110, '' +obs3);
+
+    if($scope.src[1]) // se nao tiver imagem nem perde tempo
+    {
+      pdf.addImage($scope.src[1], 20, 115); // cartao 1
+    }
+
+    if($scope.src[2]) // se nao tiver 2o cartao nem perde tempo
+    {
+      pdf.addPage();
+      pdf.setFontSize(8);
+      pdf.setTextColor(150);
+      pdf.text(145, 5, '' + now);
+      pdf.setTextColor(50);
+      pdf.setFontSize(10);
+      pdf.addImage(imgData, 5, 5); // adicionando logotipo no topo da pagina
+      pdf.addImage($scope.src[2], 20, 30); // cartao 2 no lugar do 1o
+    }
+
     if($scope.src[3]) // se nao tiver imagem nem perde tempo
     {
-      pdf.addImage($scope.src[3], 20, 180);  // foto produto 1
+      pdf.addPage(); // coloca a pagina q vai receber o cabecalho abaixo
+      pdf.setFontSize(8);
+      pdf.setTextColor(150);
+      pdf.text(145, 5, '' + now);
+      pdf.setTextColor(50);
+      pdf.setFontSize(10);
+      pdf.addImage(imgData, 5, 5); // adicionando logotipo no topo da pagina
+      pdf.addImage($scope.src[3], 20, 30);  // foto produto 1
     }
+
     if($scope.src[4]) // se nao tiver imagem nem perde tempo
     {
-      pdf.addImage($scope.src[4], 120, 180); // foto produto 2
+      pdf.addPage(); // coloca a pagina q vai receber o cabecalho abaixo
+      pdf.setFontSize(8);
+      pdf.setTextColor(150);
+      pdf.text(145, 5, '' + now);
+      pdf.setTextColor(50);
+      pdf.setFontSize(10);
+      pdf.addImage(imgData, 5, 5); // adicionando logotipo no topo da pagina
+      pdf.addImage($scope.src[4], 20, 30); // foto produto 2
     }
+
     if($scope.src[5]) // se nao tiver imagem nem perde tempo
     {
-      pdf.addImage($scope.src[5], 20, 240);  // foto produto 3
+      pdf.addPage(); // caso so tiver a ultima imagem ela nao vai aparecer,
+      pdf.setFontSize(8);
+      pdf.setTextColor(150);
+      pdf.text(145, 5, '' + now);
+      pdf.setTextColor(50);
+      pdf.setFontSize(10);
+      pdf.addImage(imgData, 5, 5); // adicionando logotipo no topo da pagina
+      pdf.addImage($scope.src[5], 20, 30);  // foto produto 3
     }
+
     if($scope.src[6]) // se nao tiver imagem nem perde tempo
     {
-      pdf.addImage($scope.src[6], 120, 240); // foto produto 4
+      pdf.addPage(); // caso so tiver a ultima imagem ela nao vai aparecer,
+      pdf.setFontSize(8);
+      pdf.setTextColor(150);
+      pdf.text(145, 5, '' + now);
+      pdf.setTextColor(50);
+      pdf.setFontSize(10);
+      pdf.addImage(imgData, 5, 5); // adicionando logotipo no topo da pagina
+      pdf.addImage($scope.src[6], 20, 30); // foto produto 4
     }
     return pdf.output("blob");
   }
+
+var showPdf(filename)
+{
+  var filePath = cordova.file.dataDirectory;
+  $cordovaFileOpener2.open(filepath+filename,'application/pdf').then(
+    function()
+    {
+      console.log("abrindo"+filepath+filename)
+    },
+    function(err) {
+      console.log("falha ao abrir"+filepath+filename)
+    });
+}
 });
 })

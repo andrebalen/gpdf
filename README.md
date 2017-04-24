@@ -76,6 +76,7 @@ Lista de plugins incluidos
 - ionic plugin add cordova-plugin-file-tranfer
 - ionic plugin add cordova-plugin-toast
 - ionic plugin add cordova-plugin-network-information
+- ionic plugin add cordova-plugin-file-opener2
 ```
 
 ## Trobleshooting
