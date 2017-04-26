@@ -124,12 +124,12 @@
 
           </pre>
           <p> Visualizar itens da fila de envio:</p>
-          <div ng-repeat="w in localstorage.item">
-           [{{$index + 1}}]<button class="button button-full" ng-click="showPdf(w)">  {{w}}  </button>
+          <div ng-repeat="item in localstorage">
+           [{{$index + 1}}]<button class="button button-full" ng-click="showPdf(item)">  {{item}}  </button>
           </div>
 
           <!--p>livre no dispositivo: {{ free }} mb</p -->
-          <p align="right"> v0.107 (c) guelcos.com </p>
+          <p align="right"> v0.111 (c) guelcos.com </p>
           <!-- ion-icon name="ion-social-dropbox-outline"></ion-icon -->
               <!-- div id="abc">, este projeto é mantido colaborativamente em: http://github.com/andrebalen/gpdf</div -->
 
