@@ -264,15 +264,21 @@ GPDF.controller('pdfCtrl',  function($rootScope, $scope, $cordovaFile, $cordovaN
 $scope.showPdf=function(filename)
 {
   var filePath = cordova.file.dataDirectory;
-  console.log("abrindo"+filepath+filename)
-  $cordovaFileOpener2.open(filepath+filename,'application/pdf').then(
+  console.log("abrindo:"+filePath+'/'+filename);
+  if(filePath)
+  {
+  $cordovaFileOpener2.open(filePath+'/'+filename,'application/pdf').then(
     function()
     {
-      console.log("ok"+filepath+filename)
+      console.log("ok "+filePath+'/'+filename);
     },
     function(err) {
-      console.log("falha ao abrir"+filepath+filename)
+      console.log("falha ao abrir "+filePath+'/'+filename);
     });
+    }
+    else {
+        console.log("falha ao acessar o caminho para "+filename);
+    }
 }
 });
 })
