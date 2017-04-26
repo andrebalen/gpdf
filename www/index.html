@@ -31,7 +31,7 @@
   <body ng-app="starter" data-ng-controller="pdfCtrl">
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <p align="left"><img src="img/simbolo.png"></p><h1 class="title">Guelcos Trade Fair App</h1>
+        <p align="left"><img src="img/simbolo.png" width="40px" alt="X"></p><h1 class="title"> Guelcos Trade Fair App </h1>
       </ion-header-bar>
       <ion-content>
         <form name="data.form" id="form">
@@ -88,9 +88,7 @@
                <input id="inmetro" placeholder="necessita inmetro? sim/nao" ng-model="produto.inmetro" type="text">
              </ion-item>
 
-             <ion-item>
-               <p> Inclua algumas imagens deste produto </p>
-             </ion-item>
+             <ion-item>   <p> Inclua algumas imagens deste produto </p>   </ion-item>
 
              <ion-item>
                <button class="button button-energized" id="prod1" ng-click="foto(3)" ng-model="data.foto3"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp;&nbsp;</button>
@@ -99,7 +97,6 @@
                <button class="button button-energized" id="prod2" ng-click="foto(4)" ng-model="data.foto4"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 2 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                 <img ng-src="{{src[4]}}" width="250px" alt="preview">
              </ion-item>
-
              <ion-item>
                <button class="button button-energized" id="prod3" ng-click="foto(5)" ng-model="data.foto5"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 3 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                <img ng-src="{{src[5]}}" width="250px" alt="preview">
@@ -122,6 +119,8 @@
 
 
 
+
+
           </pre>
           <p> Visualizar itens da fila de envio:</p>
           <div ng-repeat="item in storage">
@@ -129,12 +128,11 @@
           </div>
 
           <!--p>livre no dispositivo: {{ free }} mb</p -->
-          <p align="right"> v0.112 (c) guelcos.com </p>
+          <p align="right"> v0.113 (c) guelcos.com </p>
           <!-- ion-icon name="ion-social-dropbox-outline"></ion-icon -->
-              <!-- div id="abc">, este projeto é mantido colaborativamente em: http://github.com/andrebalen/gpdf</div -->
-
-              <!--p align="center"><ion-spinner name="ios"></ion-spinner>
-                trying to contact server --><!-- other names for spinner: ios ,ios-small, bubbles, circles, crescent, dots -->
+          <!-- div id="abc">, este projeto é mantido colaborativamente em: http://github.com/andrebalen/gpdf</div -->
+          <!--p align="center"><ion-spinner name="ios"></ion-spinner>
+          trying to contact server --><!-- other names for spinner: ios ,ios-small, bubbles, circles, crescent, dots -->
 
       </ion-content>
     </ion-pane>
