@@ -124,14 +124,14 @@
             <div>
               <p> Fila de envio:</p>
               <div ng-repeat="item in storage">
-              <button class="button button-full" block="" ng-click="data.showPdf($storage.item)" id="enviar" ng-model="btn"><i class="icon ion-compose"></i> {{$index + 1}}. {{item}} </button>
+              <button class="button button-full" block="" ng-click="data.showPdf(item);" id="enviar" ng-model="btn"><i class="icon ion-document-text"></i> {{$index + 1}}. {{item}} </button>
               </div>
               <!--ul>
                 <li ng-repeat="item in storage"><a href="#" ng-click="data.showPdf($storage.item)">{{item}} </a></li><br>
               </ul -->
             <!-- p>livre no dispositivo: {{ free }} mb</p -->
             <ul class="pull-right">
-              <li> v0.127 © 2017 Guelcos co</li>
+              <li> v0.130 © 2017 Guelcos co</li>
             </ul>
             <!-- ion-icon name="ion-social-dropbox-outline"></ion-icon -->
             <!-- div id="abc">, este projeto é mantido colaborativamente em: http://github.com/andrebalen/gpdf</div -->
