@@ -20,7 +20,7 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-    <script type="text/javascript" src="js/jspdf.debug.js"> //jspdf.min.js</script>
+    <script type="text/javascript" src="js/jspdf.min.js"> //jspdf.min.js</script>
     <!-- script type="text/javascript" src="js/plugins/cordova-plugin-file/www/file.js"></script --><!-- achar o lugar deste cara -->
 
     <!-- your app's js -->
@@ -123,9 +123,12 @@
           </pre>
             <div>
               <p> Fila de envio:</p>
-              <ul>
-                <li ng-repeat="item in storage">{{$index + 1}}.<a href="#" ng-click="data.showPdf($storage.item)">{{item}} </a></li><br>
-              </ul>
+              <div ng-repeat="item in storage">
+              <button class="button button-full" block="" ng-click="data.showPdf($storage.item)" id="enviar" ng-model="btn"><i class="icon ion-compose"></i> {{$index + 1}}. {{item}} </button>
+              </div>
+              <!--ul>
+                <li ng-repeat="item in storage"><a href="#" ng-click="data.showPdf($storage.item)">{{item}} </a></li><br>
+              </ul -->
             <!-- p>livre no dispositivo: {{ free }} mb</p -->
             <ul class="pull-right">
               <li> v0.127 © 2017 Guelcos co</li>
