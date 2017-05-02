@@ -57,7 +57,7 @@ Para o Build deste projeto, **estes arquivos devem existir exatamente com estes 
 
 * `www/index.html` é o template da pagina;
 * `www/js/app.js` é o JavaScript de inicio.
-* `www/js/controller/pdf.js é o controller de todas as acoes
+* `www/js/controller/pdf.js` é o controller de todas as acoes
 
 ## Build
 

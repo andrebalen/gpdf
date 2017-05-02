@@ -31,22 +31,23 @@
   <body ng-app="starter" data-ng-controller="pdfCtrl">
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <p align="left"><img src="img/simbolo.png" width="40px" alt="X"></p><h1 class="title"> Guelcos Trade Fair App </h1>
+        <p align="left"><img src="img/simbolo.png" width="30px" height="30px" alt="X"></p><h1 class="title"> Guelcos Trade Fair App </h1>
       </ion-header-bar>
+
       <ion-content>
         <form name="data.form" id="form">
-            <p align="left" class="user"><input id="user" placeholder="digite seu usuario" ng-model="data.user" type="text"></p>
+            <p align="left" class="user"><input id="user" pattern="[a-zA-Z0-9]+" placeholder="digite seu usuario -IMPORTANTE: não use espacos ou ascentos" ng-model="data.user" type="text"></p>
         <h3>Ficha do fabricante</h3>
          <ion-list>
            <ion-item>
              <button class="button button-energized" id="foto1" ng-click="foto(1)" ng-model="data.foto1"><i class="icon icon ion-ios-eye"></i> + cartao</button>
              <img ng-src="{{src[1]}}" width="350px" alt="preview">
-             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;
              <button class="button button-energized" id="foto2" ng-click="foto(2)" ng-model="data.foto2"><i class="icon icon ion-ios-eye"></i> 2o cartao </button>
               <img ng-src="{{src[2]}}" width="350px" alt="preview">
            </ion-item>
              <ion-item>
-               <input id="nome" placeholder="Apelido do Fabricante" type="text" ng-model="data.apelido" width="200" autofocus>
+               <input id="nome" placeholder="Apelido do Fabricante, -IMPORTANTE: não use espacos ou ascentos" pattern="[a-zA-Z0-9]+" type="text" ng-model="data.apelido" width="200" autofocus>
              </ion-item>
              <ion-item>
                <input id="wechat" placeholder="wechat id / observacoes" ng-model="data.wechat" type="text" onfocus="this.value=&apos;&apos;;">
@@ -65,7 +66,7 @@
              </ion-item>
               <h3>Ficha de produto, fabricante: {{ data.apelido }}</h3>
              <ion-item>
-              <input id="produto" placeholder="modelo / descricao" ng-model="produto.id" type="text">
+              <input id="produto" pattern="[a-zA-Z0-9]+" placeholder="modelo / descricao -IMPORTANTE: não use espacos ou ascentos" ng-model="produto.id" type="text">
              </ion-item>
              <ion-item>
                <input id="moq" placeholder="moq - quantidade mínima vendida deste produto" ng-model="produto.moq" type="text">
@@ -87,9 +88,7 @@
              <ion-item>
                <input id="inmetro" placeholder="necessita inmetro? sim/nao" ng-model="produto.inmetro" type="text">
              </ion-item>
-
              <ion-item>   <p> Inclua algumas imagens deste produto </p>   </ion-item>
-
              <ion-item>
                <button class="button button-energized" id="prod1" ng-click="foto(3)" ng-model="data.foto3"><i class="icon icon ion-ios-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp;&nbsp;</button>
                <img ng-src="{{src[3]}}" width="250px" alt="preview">
@@ -122,19 +121,22 @@
 
 
           </pre>
-          <p> Fila de envio:</p>
-          <div ng-repeat="item in storage">
-          <button class="button button-full" ng-click="showPdf(item)">{{$index + 1}} {{item}}</button>
-          </div>
+            <div>
+              <p> Fila de envio:</p>
+              <ul>
+                <li ng-repeat="item in storage">{{$index + 1}}.<a href="#" ng-click="data.showPdf($storage.item)">{{item}} </a></li><br>
+              </ul>
+            <!-- p>livre no dispositivo: {{ free }} mb</p -->
+            <ul class="pull-right">
+              <li> v0.127 © 2017 Guelcos co</li>
+            </ul>
+            <!-- ion-icon name="ion-social-dropbox-outline"></ion-icon -->
+            <!-- div id="abc">, este projeto é mantido colaborativamente em: http://github.com/andrebalen/gpdf</div -->
+            <!-- p align="center"><ion-spinner name="ios"></ion-spinner> trying to contact server -->
+            <!-- other names for spinner: ios ,ios-small, bubbles, circles, crescent, dots -->
+            </div>
 
-          <!--p>livre no dispositivo: {{ free }} mb</p -->
-          <p align="right"> v0.116 (c) guelcos.com </p>
-          <!-- ion-icon name="ion-social-dropbox-outline"></ion-icon -->
-          <!-- div id="abc">, este projeto é mantido colaborativamente em: http://github.com/andrebalen/gpdf</div -->
-          <!--p align="center"><ion-spinner name="ios"></ion-spinner>
-          trying to contact server --><!-- other names for spinner: ios ,ios-small, bubbles, circles, crescent, dots -->
-
-      </ion-content>
+        </ion-content>
     </ion-pane>
   </body>
 </html>
